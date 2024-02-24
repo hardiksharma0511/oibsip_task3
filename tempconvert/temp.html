@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('temp.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .container {
+      width: 80%;
+      margin: 50px auto;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .converter {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+    .illustration {
+      flex: 1;
+      text-align: center;
+    }
+    .illustration img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      animation: floatAnimation 5s ease infinite alternate;
+    }
+    @keyframes floatAnimation {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="converter">
+      <h1>Temperature Converter</h1>
+      <input type="number" id="temperatureInput" placeholder="Enter temperature" required>
+      <select id="conversionType">
+        <option value="celsiusToFahrenheit">Celsius to Fahrenheit</option>
+        <option value="fahrenheitToCelsius">Fahrenheit to Celsius</option>
+        <option value="celsiusToKelvin">Celsius to Kelvin</option>
+        <option value="kelvinToCelsius">Kelvin to Celsius</option>
+        <option value="fahrenheitToKelvin">Fahrenheit to Kelvin</option>
+        <option value="kelvinToFahrenheit">Kelvin to Fahrenheit</option>
+      </select>
+      <button onclick="convert()">Convert</button>
+      <div id="result"></div>
+    </div>
+    <div class="illustration">
+      <img src="ill.gif" alt="Illustration" />
+    </div>
+  </div>
+
+  <script>
+    function convert() {
+        var temperatureInput = parseFloat(document.getElementById("temperatureInput").value);
+        var conversionType = document.getElementById("conversionType").value;
+        var result;
+        var info;
+      
+        switch (conversionType) {
+          case "celsiusToFahrenheit":
+            result = (temperatureInput * 9/5) + 32;
+            info = "This is the equivalent temperature in Fahrenheit.";
+            document.getElementById("result").innerHTML = temperatureInput + "°C is " + result.toFixed(2) + "°F. " + info;
+            break;
+          case "fahrenheitToCelsius":
+            result = (temperatureInput - 32) * 5/9;
+            info = "This is the equivalent temperature in Celsius.";
+            document.getElementById("result").innerHTML = temperatureInput + "°F is " + result.toFixed(2) + "°C. " + info;
+            break;
+          case "celsiusToKelvin":
+            result = temperatureInput + 273.15;
+            info = "This is the equivalent temperature in Kelvin.";
+            document.getElementById("result").innerHTML = temperatureInput + "°C is " + result.toFixed(2) + " K. " + info;
+            break;
+          case "kelvinToCelsius":
+            result = temperatureInput - 273.15;
+            info = "This is the equivalent temperature in Celsius.";
+            document.getElementById("result").innerHTML = temperatureInput + " K is " + result.toFixed(2) + "°C. " + info;
+            break;
+          case "fahrenheitToKelvin":
+            result = (temperatureInput - 32) * 5/9 + 273.15;
+            info = "This is the equivalent temperature in Kelvin.";
+            document.getElementById("result").innerHTML = temperatureInput + "°F is " + result.toFixed(2) + " K. " + info;
+            break;
+          case "kelvinToFahrenheit":
+            result = (temperatureInput - 273.15) * 9/5 + 32;
+            info = "This is the equivalent temperature in Fahrenheit.";
+            document.getElementById("result").innerHTML = temperatureInput + " K is " + result.toFixed(2) + "°F. " + info;
+            break;
+          default:
+            document.getElementById("result").innerHTML = "Invalid conversion type";
+        }
+      }
+  </script>
+</body>
+</html>
